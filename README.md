@@ -7,7 +7,7 @@ up to the National Clincal Terminology Servce (NCTS) using .NET.
 Setup
 =====
 - To build the distributable package, Visual Studio 2015 must be installed.
-- Start up NctsClient.sln
+- Start up DigitalHealth.Ncts.Client.sln
 
 
 Solution
