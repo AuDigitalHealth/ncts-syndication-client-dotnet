@@ -1,7 +1,7 @@
 # Project
 
 This is a software library that provides an example implementation of how to connect 
-up to the National Clincal Terminology Servce (NCTS) using .NET.
+up to the National Clinical Terminology Servce (NCTS) using .NET.
 
 
 Setup
