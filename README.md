@@ -13,7 +13,7 @@ Setup
 Solution
 ========
 The solution consists of several projects, however the main project is the NctsClient project. 
-This project contains the code to communicate with the my health record.
+This project contains the code to communicate with the NCTS.
 
 
 Building and using the library
