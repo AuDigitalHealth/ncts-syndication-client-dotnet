@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("NctsClient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("NctsClient")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Australian Digital Health Agency")]
 [assembly: AssemblyProduct("NctsClient")]
