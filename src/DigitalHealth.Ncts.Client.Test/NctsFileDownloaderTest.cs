@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using System.Threading.Tasks;
@@ -34,7 +34,7 @@ namespace DigitalHealth.Ncts.Client.Test
 
             string downloadPath = "ENTER_OUTPUT_DIR_PATH_HERE";
 
-            if (entry != null )
+            if (entry != null)
             {
                 await _client.DownloadFile(entry.Link.Href, entry.Link.Sha256Hash, entry.Link.Length, downloadPath);
             }
@@ -47,7 +47,7 @@ namespace DigitalHealth.Ncts.Client.Test
             List<AtomEntry> entries = await _client.GetListOfEntries(Category.SctRf2Delta);
 
             string downloadPath = "ENTER_OUTPUT_DIR_PATH_HERE";
-            
+
             if (entries != null && entries.Any())
             {
                 //SUGGESTION: Only download latest option based from client selection of entry 
@@ -71,7 +71,7 @@ namespace DigitalHealth.Ncts.Client.Test
 
             // Should return 400 Bad Request 
             AuthenticationException exception = Assert.ThrowsAsync<AuthenticationException>(
-                async ()=> await fileDownloader.GetListOfEntries(Category.SctRf2Snapshot));
+                async () => await fileDownloader.GetListOfEntries(Category.SctRf2Snapshot));
 
             Assert.That(exception.Message, Is.EqualTo("Could not get token from authentication server"));
         }
