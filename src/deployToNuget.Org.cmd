@@ -4,7 +4,8 @@ nuget restore
 
 msbuild DigitalHealth.Ncts.Client.sln /p:Configuration=Release
 
-NuGet.exe pack DigitalHealth.Ncts.Client/DigitalHealth.Ncts.Client.csproj  -Properties Configuration=Release
+NuGet.exe pack DigitalHealth.Ncts.Client/DigitalHealth.Ncts.Client.csproj 
+REM  -Properties Configuration=Release
 
 pause
 
