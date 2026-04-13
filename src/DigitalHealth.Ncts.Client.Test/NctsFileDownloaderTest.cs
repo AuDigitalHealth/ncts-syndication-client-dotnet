@@ -1,13 +1,12 @@
+using DigitalHealth.Ncts.Client.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using System.Threading.Tasks;
-using DigitalHealth.Ncts.Client.Models;
-using NUnit.Framework;
+using Xunit;
 
 namespace DigitalHealth.Ncts.Client.Test
 {
-    [TestFixture]
     public class NctsFileDownloaderTest
     {
         private INctsFileDownloader _client;
@@ -16,23 +15,22 @@ namespace DigitalHealth.Ncts.Client.Test
         private string _clientSecret;
 
 
-        [SetUp]
-        public void Setup()
+        public NctsFileDownloaderTest()
         {
-            _clientId = "INSERT_CLIENT_ID_FROM_NCTS_WEBSITE";
-            _clientSecret = "INSERT_CLIENT_SECRET_FROM_NCTS_WEBSITE";
+			_clientId = "<CLIENTID>";
+			_clientSecret = "<SECRET>";
 
-            // Initialize the test client
-            _client = new NctsFileDownloader(_clientId, _clientSecret);
+			// Initialize the test client
+			_client = new NctsFileDownloader(_clientId, _clientSecret);
         }
 
-        [Test]
-        public async Task DownloadSingleFile_When_Valid_ClientId_And_Secret_Returns_Files()
+		[Fact]
+		public async Task DownloadSingleFile_When_Valid_ClientId_And_Secret_Returns_Files()
         {
             // Returns list of snapshots zip files available to download
             AtomEntry entry = await _client.GetLatestEntryForCategory(Category.SctRf2Snapshot);
 
-            string downloadPath = "ENTER_OUTPUT_DIR_PATH_HERE";
+            string downloadPath = "c:\\temp\\";
 
             if (entry != null)
             {
@@ -40,15 +38,15 @@ namespace DigitalHealth.Ncts.Client.Test
             }
         }
 
-        [Test]
-        public async Task DownloadFile_When_Valid_ClientId_And_Secret_Returns_Files()
+		[Fact]
+		public async Task DownloadFile_When_Valid_ClientId_And_Secret_Returns_Files()
         {
             // Returns list of snapshots zip files available to download
-            List<AtomEntry> entries = await _client.GetListOfEntries(Category.SctRf2Delta);
+            IList<AtomEntry> entries = await _client.GetListOfEntries(Category.SctRf2Snapshot);
 
-            string downloadPath = "ENTER_OUTPUT_DIR_PATH_HERE";
+            string downloadPath = "c:\\temp\\";
 
-            if (entries != null && entries.Any())
+			if (entries != null && entries.Any())
             {
                 //SUGGESTION: Only download latest option based from client selection of entry 
                 var entry = entries.First();
@@ -56,24 +54,24 @@ namespace DigitalHealth.Ncts.Client.Test
             }
         }
 
-        [Test]
-        public async Task GetListOfEntries_When_No_Category_Specified_Then_Get_All()
+		[Fact]
+		public async Task GetListOfEntries_When_No_Category_Specified_Then_Get_All()
         {
-            List<AtomEntry> entries = await _client.GetListOfEntries();
+            IList<AtomEntry> entries = await _client.GetListOfEntries();
 
-            Assert.That(entries.Count, Is.GreaterThan(0));
+            Assert.True(entries.Count > 0);
         }
 
-        [Test]
-        public void DownloadFile_When_Invalid_ClientId_And_Secret_Throws()
+		[Fact]
+		public async Task DownloadFile_When_Invalid_ClientId_And_Secret_Throws()
         {
             INctsFileDownloader fileDownloader = new NctsFileDownloader(null, null);
 
             // Should return 400 Bad Request 
-            AuthenticationException exception = Assert.ThrowsAsync<AuthenticationException>(
+            var exception = await Assert.ThrowsAsync<AuthenticationException>(
                 async () => await fileDownloader.GetListOfEntries(Category.SctRf2Snapshot));
 
-            Assert.That(exception.Message, Is.EqualTo("Could not get token from authentication server"));
+            Assert.Equal("Could not get token from authentication server", exception.Message);
         }
     }
 }

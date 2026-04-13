@@ -1,16 +1,37 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	<PropertyGroup>
+		<TargetFrameworks>net472;netstandard2.0;net10.0</TargetFrameworks>
+		<OutputType>Library</OutputType>
+		<RootNamespace>DigitalHealth.Ncts.Client</RootNamespace>
+		<AssemblyName>DigitalHealth.Ncts.Client</AssemblyName>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<EnableNETAnalyzers>false</EnableNETAnalyzers>
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<AnalysisLevel>latest</AnalysisLevel>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Version>1.0.1.0</Version>
+		<Description>A library for connecting and downloading content from NCTS</Description>
+		<Company>Australian Digital Health Agency</Company>
+		<Authors>$(Company)</Authors>
+		<Copyright>Copyright ©2026</Copyright>
+		<PackageReleaseNotes>Added net10, netstandard2.0 compatible version of library</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/AuDigitalHealth/ncts-syndication-client-dotnet</PackageProjectUrl>
+		<PackageTags>ADHA Digital Health Nehta</PackageTags>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0.2</Version>
-    <Copyright>Copyright ©2024</Copyright>
-    <Company>Australian Digital Health Agency</Company>
-    <Authors />
-    <Description>A library for connecting and downloading content from NCTS</Description>
-  </PropertyGroup>
-
+    <WarningLevel>0</WarningLevel>
+	  <!-- Suppress specific warnings -->
+    <NoWarn>1701;1702;CS1591;</NoWarn>
+  </PropertyGroup>	
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+	</ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
+    <Content Include="..\..\LICENSE.txt" Link="Properties\LICENSE.txt" PackagePath="LICENSE.txt" />
+	<None Include="..\..\README.md" Pack="true" PackagePath="README.md"/>
+  </ItemGroup>	
 </Project>

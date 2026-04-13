@@ -1,11 +1,6 @@
 del *.nupkg
 
-nuget restore
-
-msbuild DigitalHealth.Ncts.Client.sln /p:Configuration=Release
-
-NuGet.exe pack DigitalHealth.Ncts.Client/DigitalHealth.Ncts.Client.csproj 
-REM  -Properties Configuration=Release
+dotnet pack .\DigitalHealth.Ncts.Client/DigitalHealth.Ncts.Client.csproj -c Release -o .
 
 pause
 
